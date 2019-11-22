@@ -28,7 +28,7 @@ void Prey_finder::_update_(Prey_finder &pf) {
     {
         pf._pixy.ccc.getBlocks();
         if (pf._pixy.ccc.numBlocks){
-            pf.angle = ((double)pf._pixy.ccc.blocks[0].m_x) / 320 * 60 - 30;
+            pf.angle = ((double)pf._pixy.ccc.blocks[0].m_x) / 320.0 * 60.0 - 30.0;
             gettimeofday( &pf._last_detection , NULL);
         }
     }
