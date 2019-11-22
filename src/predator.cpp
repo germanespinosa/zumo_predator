@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
   //gcomm::GMemConnector m(200, gcomm::GMemConnector::mode::master);
   //gcomm::GComm<int,int> c (m);
   Prey_finder pf;
-  int angle;
+  double angle;
 
   while (pf.get_prey(angle)<3) {
       cout<< "Angle: " << angle  << endl;

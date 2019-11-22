@@ -12,7 +12,7 @@
 struct Prey_finder {
     Prey_finder();
     ~Prey_finder();
-    double get_prey(int &);
+    double get_prey(double &);
     double angle;
 private:
     Pixy2  _pixy;

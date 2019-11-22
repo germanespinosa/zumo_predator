@@ -11,7 +11,7 @@ Prey_finder::Prey_finder() {
     _active = true;
 }
 
-double Prey_finder::get_prey(int &a) {
+double Prey_finder::get_prey(double &a) {
     a = angle;
     struct timeval prev = _last_detection;
     struct timeval now;
