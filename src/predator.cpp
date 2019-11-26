@@ -24,12 +24,18 @@ int main(int argc, char *argv[])
         if (age<3){
             if (size>6000) {
                 d.state = 2; // caught
+                d.speed = 0;
+                d.angle = 0;
             } else {
                 d.state = 1; //found
-                d.speed = 100;
-                d.angle = angle;
+                d.speed = 120;
+                d.angle = angle * 3;
             }
-        } // lost contact
+        } else {
+            d.state = 0; // lost contact
+            d.speed = 0;
+            d.angle = angle >= 0? 100 : -100;
+        }
         cout << d.state << " " << d.speed << " " << d.angle << " ";
         cout << endl;
         conn.write_buffer(&d, sizeof(data));
