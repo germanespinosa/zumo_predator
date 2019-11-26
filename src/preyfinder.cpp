@@ -11,14 +11,16 @@ Prey_finder::Prey_finder() {
     _active = true;
 }
 
-double Prey_finder::get_prey(double &a) {
+double Prey_finder::get_prey(double &a, double &d) {
     a = angle;
+    d = size;
     struct timeval prev = _last_detection;
     struct timeval now;
     gettimeofday( &now , NULL);
     double x_ms , y_ms , diff;
     x_ms = (double)prev.tv_sec*1000000 + (double)prev.tv_usec;
     y_ms = (double)now.tv_sec*1000000 + (double)now.tv_usec;
+
     diff = (double)y_ms - (double)x_ms;
     return diff/1000000;
 }
@@ -29,6 +31,8 @@ void Prey_finder::_update_(Prey_finder &pf) {
         pf._pixy.ccc.getBlocks();
         if (pf._pixy.ccc.numBlocks){
             pf.angle = ((double)pf._pixy.ccc.blocks[0].m_x) / 320.0 * 60.0 - 30.0;
+            double new_size = pf._pixy.ccc.blocks[0].m_height * pf._pixy.ccc.blocks[0].m_width;
+            pf.size = (pf.size*.9) + (new_size*.1);
             gettimeofday( &pf._last_detection , NULL);
         }
     }

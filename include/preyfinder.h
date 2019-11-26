@@ -12,8 +12,9 @@
 struct Prey_finder {
     Prey_finder();
     ~Prey_finder();
-    double get_prey(double &);
+    double get_prey(double &,double &);
     double angle;
+    double size;
 private:
     Pixy2  _pixy;
     std::thread _update_thread;
