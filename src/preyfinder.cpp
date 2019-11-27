@@ -30,20 +30,30 @@ double Prey_finder::get_prey(double &a, double &d) {
 }
 
 void Prey_finder::_update_(Prey_finder &pf) {
+    static int prey_idex = -1;
     while (pf._active)
     {
         pf._pixy.ccc.getBlocks();
         if (pf._pixy.ccc.numBlocks){
             int f = -1;
             for (int i=0; i < pf._pixy.ccc.numBlocks; i++) {
-                if (pf._pixy.ccc.blocks[i].m_signature==1){
-                    for (int j=0; j < pf._pixy.ccc.numBlocks; j++) {
-                        if (pf._pixy.ccc.blocks[j].m_signature==2){
-                            if (pf._pixy.ccc.blocks[j].m_y > pf._pixy.ccc.blocks[i].m_y){
-                                if (pf._pixy.ccc.blocks[j].m_x > pf._pixy.ccc.blocks[i].m_x - pf._pixy.ccc.blocks[i].m_width) {
-                                    if (pf._pixy.ccc.blocks[j].m_x <
-                                        pf._pixy.ccc.blocks[i].m_x + pf._pixy.ccc.blocks[i].m_width) {
-                                        f = i;
+                if (pf._pixy.ccc.blocks[i].m_index == prey_idex){
+                    f=i;
+                }
+            }
+            if (f<0) { // pixy lost track of the prey, let's find it again
+                for (int i = 0; i < pf._pixy.ccc.numBlocks; i++) {
+                    if (pf._pixy.ccc.blocks[i].m_signature == 1) {
+                        for (int j = 0; j < pf._pixy.ccc.numBlocks; j++) {
+                            if (pf._pixy.ccc.blocks[j].m_signature == 2) {
+                                if (pf._pixy.ccc.blocks[j].m_y > pf._pixy.ccc.blocks[i].m_y) {
+                                    if (pf._pixy.ccc.blocks[j].m_x >
+                                        pf._pixy.ccc.blocks[i].m_x - pf._pixy.ccc.blocks[i].m_width) {
+                                        if (pf._pixy.ccc.blocks[j].m_x <
+                                            pf._pixy.ccc.blocks[i].m_x + pf._pixy.ccc.blocks[i].m_width) {
+                                            f = i;
+                                            prey_idex = pf._pixy.ccc.blocks[i].m_index;
+                                        }
                                     }
                                 }
                             }
@@ -56,9 +66,9 @@ void Prey_finder::_update_(Prey_finder &pf) {
                 double new_size = pf._pixy.ccc.blocks[f].m_height * pf._pixy.ccc.blocks[f].m_width;
                 pf.size = (pf.size * .9) + (new_size * .1);
                 gettimeofday(&pf._last_detection, NULL);
-                //pf._pixy.ccc.blocks[f].print();
             }
         }
+        usleep(50000);
     }
 }
 

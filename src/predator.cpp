@@ -13,8 +13,8 @@ struct data {
 
 int main(int argc, char *argv[])
 {
-    GUartBuffers serial(GUart::Baudrate::b57600);
-    GBufferConnector conn(serial.rx_buffer, serial.tx_buffer);
+    //GUartBuffers serial(GUart::Baudrate::b57600);
+    //GBufferConnector conn(serial.rx_buffer, serial.tx_buffer);
     Prey_finder pf;
     double angle,size;
     bool active = true;
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
         }
         cout << d.state << " " << d.speed << " " << d.angle << " ";
         cout << endl;
-        conn.write_buffer(&d, sizeof(data));
+        //conn.write_buffer(&d, sizeof(data));
         usleep(100000);
     }
 }
