@@ -48,9 +48,9 @@ void Prey_finder::_update_(Prey_finder &pf) {
                             if (pf._pixy.ccc.blocks[j].m_signature == 2) {
                                 if (pf._pixy.ccc.blocks[j].m_y > pf._pixy.ccc.blocks[i].m_y) {
                                     if (pf._pixy.ccc.blocks[j].m_x >
-                                        pf._pixy.ccc.blocks[i].m_x - pf._pixy.ccc.blocks[i].m_width) {
+                                        pf._pixy.ccc.blocks[i].m_x - pf._pixy.ccc.blocks[i].m_width * 2) {
                                         if (pf._pixy.ccc.blocks[j].m_x <
-                                            pf._pixy.ccc.blocks[i].m_x + pf._pixy.ccc.blocks[i].m_width) {
+                                            pf._pixy.ccc.blocks[i].m_x + pf._pixy.ccc.blocks[i].m_width * 2) {
                                             f = i;
                                             prey_idex = pf._pixy.ccc.blocks[i].m_index;
                                         }
